@@ -25,3 +25,35 @@ img { /* stylelint-disable-line */
 }
 
 // TODO import
+
+
+//stillingar í hausi
+.haus {
+  background-image: url("../img/header.jpg");
+  background-color: rgba(0,0,0,0.6);
+  height: 100vh;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+}
+.haus__h1 {
+  color: $black;
+  text-align: center;
+  width: 100%;
+  margin-top: 50px;
+  font-family: $font-heading;
+  font-size: 128px;
+}
+.haus__fag {
+  color: $black;
+  text-transform: uppercase;
+  text-align: center;
+  width: 100%;
+  font-family: $font-heading;
+  font-size: 36px;
+}
+
+
+@media(min-width: 700px){
+
+}
