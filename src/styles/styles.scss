@@ -27,7 +27,7 @@ img { /* stylelint-disable-line */
 // TODO import
 
 
-//stillingar í hausi
+//stillingar í hausi á index.html
 .haus {
   background: url("../img/header.jpg") no-repeat center center fixed;
   background-color: rgba(0,0,0,0.6);
@@ -44,8 +44,8 @@ img { /* stylelint-disable-line */
   width: 100%;
   margin-top: 50px;
   font-family: $font-heading;
-  font-size: 64px;
 }
+font-size: 48px;
 .haus__fag {
   color: $black;
   text-transform: uppercase;
@@ -57,7 +57,7 @@ img { /* stylelint-disable-line */
 .takkar {
   display: flex;
   flex-wrap: nowrap;
-  justify-content: space-around;
+  justify-content: center;
   margin-top: 2em;
   margin-bottom: 2em;
 }
@@ -68,8 +68,30 @@ img { /* stylelint-disable-line */
   font-size: 24px;
   font-weight: bold;
   padding: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+//stillingar í hausi á fyrirlestur.html sem eru öðruvísi en í index
+.haus2 {
+  background: url("../img/code.jpg") no-repeat center center fixed;
+  background-color: rgba(0,0,0,0.6);
+  background-size: cover;
+  min-height: 80vh;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
 }
 
 @media(min-width: 700px){
-
+  .haus__bg {
+    min-height: 50vh;
+  }
+  .takkar__bg {
+    justify-content: center;
+  }
+  .haus__h1__bg {
+    font-size: 128px;
+  }
 }
