@@ -11,3 +11,13 @@ document.addEventListener('DOMContentLoaded', () => {
     list.load();
   }
 });
+
+//EventListener fyrir að gera takkana græna
+page.querySelectorAll('button').addEventListener('click', makeGreen);
+
+//Fallið makeGreen gerir takka sem smellt var á grænan
+//ef hann var grár og öfugt
+function makeGreen(e) {
+  e.target.classList.toggle('takkar__takki');
+  e.target.classList.toggle('takkar__takki--merkt');
+}

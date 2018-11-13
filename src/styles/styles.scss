@@ -44,8 +44,9 @@ img { /* stylelint-disable-line */
   width: 100%;
   margin-top: 50px;
   font-family: $font-heading;
+  font-size: 48px;
 }
-font-size: 48px;
+
 .haus__fag {
   color: $black;
   text-transform: uppercase;
@@ -61,9 +62,19 @@ font-size: 48px;
   margin-top: 2em;
   margin-bottom: 2em;
 }
-.takkar_takki {
+.takkar__takki {
   border-radius: 10px;
   background-color: $lightgrey;
+  font-family: $font-heading;
+  font-size: 24px;
+  font-weight: bold;
+  padding: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+.takkar__takki--merkt {
+  border-radius: 10px;
+  background-color: $lime;
   font-family: $font-heading;
   font-size: 24px;
   font-weight: bold;
