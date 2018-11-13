@@ -13,7 +13,9 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 //EventListener fyrir að gera takkana græna
-page.querySelectorAll('button').addEventListener('click', makeGreen);
+for(let t of document.querySelector('.takkar').children){
+  t.addEventListener('click', makeGreen);
+}
 
 //Fallið makeGreen gerir takka sem smellt var á grænan
 //ef hann var grár og öfugt
