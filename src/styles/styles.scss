@@ -95,6 +95,22 @@ img { /* stylelint-disable-line */
   align-content: center;
 }
 
+//stillingar á boxum sem fyrirlestrarnir eru í
+.boxes {
+  //þetta er utan um öll boxin
+  width: 100%;
+  padding: 0.5*$gutter;
+}
+.boxes__box {
+  //þetta er eitt og eitt box
+  width: 33.3333%;
+  margin-left: 0.5*$gutter;
+  margin-right: 0.5*$gutter;
+  margin-bottom: $gutter;
+}
+
+
+//media stillingar fyrir stærra en 700px
 @media(min-width: 700px){
   .haus__bg {
     min-height: 50vh;
@@ -104,5 +120,8 @@ img { /* stylelint-disable-line */
   }
   .haus__h1__bg {
     font-size: 128px;
+  }
+  .boxes__box__bg {
+    width: 100%;
   }
 }
