@@ -25,7 +25,7 @@ function makeGreen(e) {
 }
 
 //finnur alla takka sem eru grænir
-function allGreens(){
+function allGreens() {
   var graenir = [];
   var i = 0;
   for(let t of document.querySelector('.takkar').children) {
@@ -36,4 +36,22 @@ function allGreens(){
   }
   return graenir;
 
+}
+
+//fall til að sækja skrár
+function saekjaFyrirlestra() {
+  fetch('../lectures.json');
+
+}
+
+//fall til að fá upplýsingar um niðurstöður, aðallega til að sækja category
+function umFyrirlestra(fyrirlestur) {
+  const [{
+    slug,
+    title,
+    category,
+    image,
+    thumbnail,
+    content,
+  }] = fyrirlestur;
 }
