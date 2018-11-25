@@ -1,4 +1,4 @@
-//import List from './lib/list';
+import List from './lib/list';
 
 document.addEventListener('DOMContentLoaded', () => {
   const page = document.querySelector('body');
