@@ -7,8 +7,9 @@ document.addEventListener('DOMContentLoaded', () => {
   if (isLecturePage) {
 
   } else {
-//    const list = new List();
-//    list.load();
+    saekjaFyrirlestra();
+    const list = new List();
+    list.load();
   }
 });
 
@@ -40,12 +41,24 @@ function allGreens() {
 
 //fall til að sækja skrár
 function saekjaFyrirlestra() {
-  fetch('../lectures.json');
-
+  fetch('../lectures.json')
+  .then(data => {
+    console.log(data.results);
+    setjaSaman(data.results);
+  })
+  .catch((error) => {console.error('Villa við að sækja gögn', error)});
 }
 
-//fall til að fá upplýsingar um niðurstöður, aðallega til að sækja category
-function umFyrirlestra(fyrirlestur) {
+function el(nafn, ...children) {
+  const element = document.createElement(name);
+  for (let child of children) {
+    element.appendChild(document.createTextNode(child));
+  }
+  return element;
+}
+
+//prufufall til að setja saman box
+function setjaSaman(item) {
   const [{
     slug,
     title,
@@ -53,5 +66,20 @@ function umFyrirlestra(fyrirlestur) {
     image,
     thumbnail,
     content,
-  }] = fyrirlestur;
+  }] = item;
+
+  const result = el(
+    'div',
+    el('image', thumbnail),
+    el('div',
+      el('h4', category),
+      el('h3', title)
+    )
+  );
+
+  result.classList.add("boxes__box"); //og boxes__box__bg
+  result.querySelector("image").classList.add("boxes__mynd");
+  results.querySelector("div").classList.add("boxes__fyrirsogn");
+  results.querySelector("h4").classList.add("boxes__fyrirsogn__flokkur");
+  results.querySelector("h3").classList.add("boxes__fyrirsogn__titill");
 }
