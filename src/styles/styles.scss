@@ -42,11 +42,10 @@ img { /* stylelint-disable-line */
   color: $black;
   text-align: center;
   width: 100%;
-  margin-top: 50px;
+  margin-top: $gutter;
   font-family: $font-heading;
   font-size: 48px;
 }
-
 .haus__fag {
   color: $black;
   text-transform: uppercase;
@@ -54,6 +53,23 @@ img { /* stylelint-disable-line */
   width: 100%;
   font-family: $font-heading;
   font-size: 24px;
+}
+
+//stillingar í hausi á fyrirlestur.html sem eru öðruvísi en í index
+.haus2 {
+  background: url("../img/code.jpg") no-repeat center center fixed;
+  background-color: rgba(0,0,0,0.6);
+  background-size: cover;
+  min-height: 80vh;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+}
+
+//stillingar á efni sem er ekki í haus
+.efni {
+  max-width: $max-width;
 }
 .takkar {
   display: flex;
@@ -83,18 +99,6 @@ img { /* stylelint-disable-line */
   margin-right: 5px;
 }
 
-//stillingar í hausi á fyrirlestur.html sem eru öðruvísi en í index
-.haus2 {
-  background: url("../img/code.jpg") no-repeat center center fixed;
-  background-color: rgba(0,0,0,0.6);
-  background-size: cover;
-  min-height: 80vh;
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  align-content: center;
-}
-
 //stillingar á boxum sem fyrirlestrarnir eru í
 .boxes {
   //þetta er utan um öll boxin
@@ -109,19 +113,31 @@ img { /* stylelint-disable-line */
   margin-bottom: $gutter;
 }
 
+//stillingar fyrir fyrirlestur.html
+.fyrirlestur__texti {
+  width: 100%;
+}
+
 
 //media stillingar fyrir stærra en 700px
 @media(min-width: 700px){
+  //haus
   .haus__bg {
     min-height: 50vh;
   }
+  .haus__h1__bg {
+    font-size: 64px;
+  }
+  //takkar
   .takkar__bg {
     justify-content: center;
   }
-  .haus__h1__bg {
-    font-size: 128px;
-  }
+  //box í index.html
   .boxes__box__bg {
     width: 100%;
+  }
+  //texti í fyrirlestur.html
+  .fyrirlestur__texti__bg {
+    width: 66.6667%;
   }
 }
