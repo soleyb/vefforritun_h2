@@ -40,22 +40,23 @@ img { /* stylelint-disable-line */
   display: flex;
   flex-wrap: wrap;
   align-content: center;
-}
-.haus__h1 {
-  color: $black;
-  text-align: center;
-  width: 100%;
-  margin-top: $gutter;
-  font-family: $font-heading;
-  font-size: 48px;
-}
-.haus__fag {
-  color: $black;
-  text-transform: uppercase;
-  text-align: center;
-  width: 100%;
-  font-family: $font-heading;
-  font-size: 24px;
+
+  &__h1 {
+    color: $black;
+    text-align: center;
+    width: 100%;
+    margin-top: $gutter;
+    font-family: $font-heading;
+    font-size: 48px;
+  }
+  &__fag {
+    color: $black;
+    text-transform: uppercase;
+    text-align: center;
+    width: 100%;
+    font-family: $font-heading;
+    font-size: 24px;
+  }
 }
 
 //stillingar í hausi á fyrirlestur.html sem eru öðruvísi en í index
@@ -80,26 +81,27 @@ img { /* stylelint-disable-line */
   justify-content: center;
   margin-top: 2em;
   margin-bottom: 2em;
-}
-.takkar__takki {
-  border-radius: 10px;
-  background-color: $lightgrey;
-  font-family: $font-heading;
-  font-size: 24px;
-  font-weight: bold;
-  padding: 10px;
-  margin-left: 5px;
-  margin-right: 5px;
-}
-.takkar__takki--merkt {
-  border-radius: 10px;
-  background-color: $lime;
-  font-family: $font-heading;
-  font-size: 24px;
-  font-weight: bold;
-  padding: 10px;
-  margin-left: 5px;
-  margin-right: 5px;
+
+  &__takki {
+    border-radius: 10px;
+    background-color: $lightgrey;
+    font-family: $font-heading;
+    font-size: 24px;
+    font-weight: bold;
+    padding: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+  &__takki--merkt {
+    border-radius: 10px;
+    background-color: $lime;
+    font-family: $font-heading;
+    font-size: 24px;
+    font-weight: bold;
+    padding: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
 }
 
 //stillingar á boxum sem fyrirlestrarnir eru í
@@ -107,29 +109,30 @@ img { /* stylelint-disable-line */
   //þetta er utan um öll boxin
   width: 100%;
   padding: 0.5*$gutter;
-}
-.boxes__box {
-  //þetta er eitt og eitt box
-  width: 33.3333%;
-  margin-left: 0.5*$gutter;
-  margin-right: 0.5*$gutter;
-  margin-bottom: $gutter;
-}
-.boxes__mynd {
-  //thumbnailið innan í box
-  width: 100%;
-}
-.boxes__fyrirsogn {
-  //fyrirsagnirnar í gráu boxunum
-  background-color: $lightgrey;
-}
-.boxes__fyrirsogn__titill {
-  //titillinn á fyrirlestrinum
-  font-size: 16px;
-}
-.boxes__fyrirsogn__flokkur {
-  //flokkurinn á fyrirlestrinum (category, html/css/javascript)
-  font-size: 12px;
+
+  &__box {
+    //þetta er eitt og eitt box
+    width: 33.3333%;
+    margin-left: 0.5*$gutter;
+    margin-right: 0.5*$gutter;
+    margin-bottom: $gutter;
+  }
+  &__mynd {
+    //thumbnailið innan í box
+    width: 100%;
+  }
+  &__fyrirsogn {
+    //fyrirsagnirnar í gráu boxunum
+    background-color: $lightgrey;
+  }
+  &__titill {
+    //titillinn á fyrirlestrinum
+    font-size: 16px;
+  }
+  &__flokkur {
+    //flokkurinn á fyrirlestrinum (category, html/css/javascript)
+    font-size: 12px;
+  }
 }
 
 
