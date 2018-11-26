@@ -48,21 +48,33 @@ function saekjaFyrirlestra() {
   })
   .then(data => {
     console.log(data);
+    setjaSaman(data.lectures);
   })
   .catch((error) => {console.error('Villa við að sækja gögn', error)});
 }
 
 function el(nafn, ...children) {
-  const element = document.createElement(name);
+  const element = document.createElement(nafn);
+  console.log(nafn);
   for (let child of children) {
-    element.appendChild(document.createTextNode(child));
+    if(nafn == 'img') {
+      element.src = child;
+    }
+    else if(typeof child == 'string'){
+      element.appendChild(document.createTextNode(child));
+    }
+    else {
+      element.appendChild(child);
+    }
+    console.log(child);
   }
   return element;
 }
 
 //prufufall til að setja saman box
 function setjaSaman(item) {
-  const [{
+  console.log(item);
+/*  const [{
     slug,
     title,
     category,
@@ -70,19 +82,39 @@ function setjaSaman(item) {
     thumbnail,
     content,
   }] = item;
+*/
+
+  // itemm
+  // itemm[0]
+
+  let n=item.length;
+
+  console.log(item[0].slug);
+
+
+  console.log("hæ aftur");
+
+
 
   const result = el(
     'div',
-    el('image', thumbnail),
+    el('img', item[0].thumbnail),
     el('div',
-      el('h4', category),
-      el('h3', title)
+      el('h4', item[0].category),
+      el('h3', item[0].title)
     )
   );
 
+  document.querySelector(".boxes").appendChild(result);
+  console.log(result);
+  console.log("0");
   result.classList.add("boxes__box"); //og boxes__box__bg
-  result.querySelector("image").classList.add("boxes__mynd");
-  results.querySelector("div").classList.add("boxes__fyrirsogn");
-  results.querySelector("h4").classList.add("boxes__fyrirsogn__flokkur");
-  results.querySelector("h3").classList.add("boxes__fyrirsogn__titill");
+  console.log("1");
+  result.querySelector("img").classList.add("boxes__mynd");
+  console.log("2");
+  result.querySelector("div").classList.add("boxes__fyrirsogn");
+  result.querySelector("h4").classList.add("boxes__fyrirsogn__flokkur");
+  result.querySelector("h3").classList.add("boxes__fyrirsogn__titill");
+
+  document.querySelector(".boxes").appendChild(result);
 }
