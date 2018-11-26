@@ -1,5 +1,6 @@
 import List from './lib/list';
 
+
 document.addEventListener('DOMContentLoaded', () => {
   const page = document.querySelector('body');
   const isLecturePage = page.classList.contains('lecture-page');
@@ -42,9 +43,14 @@ function allGreens() {
 //fall til að sækja skrár
 function saekjaFyrirlestra() {
   fetch('../lectures.json')
+  .then(res => {
+//    console.log(JSON.stringify(res));
+    return res.json();
+  })
   .then(data => {
-    console.log(data.results);
-    setjaSaman(data.results);
+    console.log(data);
+//    console.log(JSON.stringify(data));
+//    setjaSaman(data.results);
   })
   .catch((error) => {console.error('Villa við að sækja gögn', error)});
 }
