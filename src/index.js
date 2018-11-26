@@ -91,30 +91,33 @@ function setjaSaman(item) {
 
   console.log(item[0].slug);
 
-
   console.log("hæ aftur");
 
+  let i=0;
 
+  while(i<n){
 
-  const result = el(
-    'div',
-    el('img', item[0].thumbnail),
-    el('div',
-      el('h4', item[0].category),
-      el('h3', item[0].title)
-    )
-  );
+    const result = el(
+      'div',
+      el('img', item[i].thumbnail),
+      el('div',
+        el('h4', item[i].category),
+        el('h3', item[i].title)
+      )
+    );
 
-  document.querySelector(".boxes").appendChild(result);
-  console.log(result);
-  console.log("0");
-  result.classList.add("boxes__box"); //og boxes__box__bg
-  console.log("1");
-  result.querySelector("img").classList.add("boxes__mynd");
-  console.log("2");
-  result.querySelector("div").classList.add("boxes__fyrirsogn");
-  result.querySelector("h4").classList.add("boxes__fyrirsogn__flokkur");
-  result.querySelector("h3").classList.add("boxes__fyrirsogn__titill");
+    document.querySelector(".boxes").appendChild(result);
+    console.log(result);
+    console.log("0");
+    result.classList.add("boxes__box"); //og boxes__box__bg
+    console.log("1");
+    result.querySelector("img").classList.add("boxes__mynd");
+    console.log("2");
+    result.querySelector("div").classList.add("boxes__fyrirsogn");
+    result.querySelector("h4").classList.add("boxes__fyrirsogn__flokkur");
+    result.querySelector("h3").classList.add("boxes__fyrirsogn__titill");
 
-  document.querySelector(".boxes").appendChild(result);
+    document.querySelector(".boxes").appendChild(result);
+    i++;
+  }
 }
