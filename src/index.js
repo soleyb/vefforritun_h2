@@ -37,7 +37,6 @@ function allGreens() {
     }
   }
   return graenir;
-
 }
 
 //fall til að sækja skrár
@@ -53,17 +52,23 @@ function saekjaFyrirlestra() {
   .catch((error) => {console.error('Villa við að sækja gögn', error)});
 }
 
+//fall sem býr til nýtt element.
+//mismunandi virkni eftir því hvort það sé að bæta við
+//nýju elementi eða setja inn mynd eða textanóðu
 function el(nafn, ...children) {
   const element = document.createElement(nafn);
   console.log(nafn);
   for (let child of children) {
     if(nafn == 'img') {
+      //ef við erum að vinna í mynd
       element.src = child;
     }
     else if(typeof child == 'string'){
+      //ef við erum að vinna með börn sem eru textar
       element.appendChild(document.createTextNode(child));
     }
     else {
+      //ef við erum að vinna með börn sem eru element
       element.appendChild(child);
     }
     console.log(child);
@@ -71,32 +76,12 @@ function el(nafn, ...children) {
   return element;
 }
 
-//prufufall til að setja saman box
+//Fall til að búa til boxin af fyrirlestrum
 function setjaSaman(item) {
-  console.log(item);
-/*  const [{
-    slug,
-    title,
-    category,
-    image,
-    thumbnail,
-    content,
-  }] = item;
-*/
-
-  // itemm
-  // itemm[0]
-
-  let n=item.length;
-
-  console.log(item[0].slug);
-
-  console.log("hæ aftur");
-
+  let n=item.length; //fjöldi fyrirlestra sem við ítrum í gegnum
   let i=0;
-
   while(i<n){
-
+    //búum til boxið, köllum það result
     const result = el(
       'div',
       el('img', item[i].thumbnail),
@@ -106,18 +91,15 @@ function setjaSaman(item) {
       )
     );
 
+    //setjum boxið inn í index.html
     document.querySelector(".boxes").appendChild(result);
-    console.log(result);
-    console.log("0");
-    result.classList.add("boxes__box"); //og boxes__box__bg
-    console.log("1");
+    //bætum við klösum
+    result.classList.add("boxes__box");
+    result.classList.add("boxes__box__bg");
     result.querySelector("img").classList.add("boxes__mynd");
-    console.log("2");
     result.querySelector("div").classList.add("boxes__fyrirsogn");
     result.querySelector("h4").classList.add("boxes__fyrirsogn__flokkur");
     result.querySelector("h3").classList.add("boxes__fyrirsogn__titill");
-
-    document.querySelector(".boxes").appendChild(result);
     i++;
   }
 }
