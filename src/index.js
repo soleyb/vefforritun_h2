@@ -24,6 +24,7 @@ for(let t of document.querySelector('.takkar').children) {
 function makeGreen(e) {
   e.target.classList.toggle('takkar__takki');
   e.target.classList.toggle('takkar__takki--merkt');
+  saekjaFyrirlestra();
 }
 
 //finnur alla takka sem eru grænir
@@ -32,7 +33,7 @@ function allGreens() {
   var i = 0;
   for(let t of document.querySelector('.takkar').children) {
     if(t.classList.contains("takkar__takki--merkt")){
-      graenir[i] = t.textContent;
+      graenir[i] = t.textContent.toLowerCase();
       i++;
     }
   }
@@ -46,10 +47,27 @@ function saekjaFyrirlestra() {
     return res.json();
   })
   .then(data => {
-    console.log(data);
-    setjaSaman(data.lectures);
+    let item = erMerkt(data.lectures);
+    setjaSaman(item);
   })
   .catch((error) => {console.error('Villa við að sækja gögn', error)});
+}
+
+//fall sem sækir bara merkta fyrirlestrana
+function erMerkt(item) {
+  let valdir = allGreens();
+  if (valdir.length == 0) {
+    return item;
+  }
+  let i=0;
+  while(i<item.length){
+    if(valdir.includes(item[i].category)==false) {
+      item.splice(i,1);
+      i--;
+    }
+    i++;
+  }
+  return item;
 }
 
 //fall sem býr til nýtt element.
@@ -57,7 +75,6 @@ function saekjaFyrirlestra() {
 //nýju elementi eða setja inn mynd eða textanóðu
 function el(nafn, ...children) {
   const element = document.createElement(nafn);
-  console.log(nafn);
   for (let child of children) {
     if(nafn == 'img') {
       //ef við erum að vinna í mynd
@@ -71,16 +88,23 @@ function el(nafn, ...children) {
       //ef við erum að vinna með börn sem eru element
       element.appendChild(child);
     }
-    console.log(child);
   }
   return element;
 }
 
 //Fall til að búa til boxin af fyrirlestrum
 function setjaSaman(item) {
+  var noda = document.querySelector(".boxes");
+  while(noda.firstChild) {
+    noda.removeChild(noda.firstChild);
+  }
   let n=item.length; //fjöldi fyrirlestra sem við ítrum í gegnum
   let i=0;
   while(i<n){
+
+    if(item[i].thumbnail==null){
+      item[i].thumbnail='img/thumbnone.jpg';
+    }
     //búum til boxið, köllum það result
     const result = el(
       'div',

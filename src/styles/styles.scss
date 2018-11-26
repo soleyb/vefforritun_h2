@@ -107,13 +107,18 @@ img { /* stylelint-disable-line */
   //þetta er utan um öll boxin
   width: 100%;
   padding: 0.5*$gutter;
+  display: flex;
+  flex-wrap: wrap;
 }
 .boxes__box {
   //þetta er eitt og eitt box
   width: 33.3333%;
-  margin-left: 0.5*$gutter;
-  margin-right: 0.5*$gutter;
+  height: 33.3333vh;
+  padding-left: 0.5*$gutter;
+  padding-right: 0.5*$gutter;
   margin-bottom: $gutter;
+  display: flex;
+  flex-flow: column;
 }
 .boxes__mynd {
   //thumbnailið innan í box
@@ -125,11 +130,14 @@ img { /* stylelint-disable-line */
 }
 .boxes__fyrirsogn__titill {
   //titillinn á fyrirlestrinum
-  font-size: 16px;
+  font-size: 18px;
+  font-family: $font-heading;
 }
 .boxes__fyrirsogn__flokkur {
   //flokkurinn á fyrirlestrinum (category, html/css/javascript)
   font-size: 12px;
+  font-family: $font-heading;
+  text-transform: uppercase;
 }
 
 
