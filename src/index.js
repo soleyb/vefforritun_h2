@@ -44,13 +44,10 @@ function allGreens() {
 function saekjaFyrirlestra() {
   fetch('../lectures.json')
   .then(res => {
-//    console.log(JSON.stringify(res));
     return res.json();
   })
   .then(data => {
     console.log(data);
-//    console.log(JSON.stringify(data));
-//    setjaSaman(data.results);
   })
   .catch((error) => {console.error('Villa við að sækja gögn', error)});
 }
