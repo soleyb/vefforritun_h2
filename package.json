@@ -1,7 +1,7 @@
 {
-  "name": "v10-synilausn",
-  "version": "1.0.0",
-  "description": "v10",
+  "name": "Hópverkefni í vefforritun",
+  "version": "0.1.0",
+  "description": "hopverkefni",
   "main": "index.js",
   "scripts": {
     "eslint": "eslint ./src/**/*.js",
@@ -15,8 +15,8 @@
     "dev": "concurrently npm:sass npm:sass-watch npm:browser-sync npm:rollup-watch"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "K, S, Þ",
+  "license": "MIT",
   "devDependencies": {
     "@babel/cli": "^7.1.5",
     "@babel/core": "^7.1.6",
