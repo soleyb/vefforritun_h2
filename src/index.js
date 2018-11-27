@@ -1,4 +1,3 @@
-import List from './lib/list';
 
 document.addEventListener('DOMContentLoaded', () => {
   const page = document.querySelector('body');
@@ -6,18 +5,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (isLecturePage) {
     //slug er slugið fyrir valinn fyrirlestur
-    let slug = window.localStorage.getItem('slug1');
+    const slug = window.localStorage.getItem('fyrirlesturSlug');
+
   } else {
     saekjaFyrirlestra();
-    const list = new List();
-    list.load();
+
+    //EventListener fyrir að gera takkana græna
+    const children = document.querySelector('.takkar').children;
+    for(let t of children) {
+      t.addEventListener('click', makeGreen);
+    }
+
   }
 });
-
-//EventListener fyrir að gera takkana græna
-for(let t of document.querySelector('.takkar').children) {
-  t.addEventListener('click', makeGreen);
-}
 
 //Fallið makeGreen gerir takka sem smellt var á grænan
 //ef hann var grár og öfugt
@@ -40,7 +40,7 @@ function faFyrirlestur(e) {
     a = a.parentNode;
     i++;
   }
-  window.localStorage.setItem('slug1',slug);
+  window.localStorage.setItem('fyrirlesturSlug',slug);
   return slug;
 }
 
@@ -65,7 +65,7 @@ function saekjaFyrirlestra() {
   })
   .then(data => {
     if (document.querySelector('body').classList.contains('lecture-page')){
-      let hlutur = erFyrirlesturinn(window.localStorage.getItem('slug1'));
+      let hlutur = erFyrirlesturinn(window.localStorage.getItem('fyrirlesturSlug'));
       buaTilFyrirlestur(hlutur);
     }
     let item = erMerkt(data.lectures);
