@@ -1,12 +1,12 @@
 import List from './lib/list';
-let valinn = 'bla';
 
 document.addEventListener('DOMContentLoaded', () => {
   const page = document.querySelector('body');
   const isLecturePage = page.classList.contains('lecture-page');
 
   if (isLecturePage) {
-
+    //slug er slugið fyrir valinn fyrirlestur
+    let slug = window.localStorage.getItem('slug1');
   } else {
     saekjaFyrirlestra();
     const list = new List();
@@ -40,6 +40,7 @@ function faFyrirlestur(e) {
     a = a.parentNode;
     i++;
   }
+  window.localStorage.setItem('slug1',slug);
   return slug;
 }
 
@@ -63,6 +64,10 @@ function saekjaFyrirlestra() {
     return res.json();
   })
   .then(data => {
+    if (document.querySelector('body').classList.contains('lecture-page')){
+      let hlutur = erFyrirlesturinn(window.localStorage.getItem('slug1'));
+      buaTilFyrirlestur(hlutur);
+    }
     let item = erMerkt(data.lectures);
     setjaSaman(item);
   })
@@ -78,6 +83,19 @@ function erMerkt(item) {
   let i=0;
   while(i<item.length){
     if(valdir.includes(item[i].category)==false) {
+      item.splice(i,1);
+      i--;
+    }
+    i++;
+  }
+  return item;
+}
+
+//fall sem hendir út öllum fyrirlestum nema þeim eina sem á að birtast
+function erFyrirlesturinn(item, slugid) {
+  let i=0;
+  while (i<item.length) {
+    if (item[i].slug!=slugid) {
       item.splice(i,1);
       i--;
     }
@@ -151,4 +169,24 @@ function setjaSaman(item) {
     result.querySelector('h3').classList.add('boxes__fyrirsogn__titill');
     i++;
   }
+}
+
+
+//el fall fyrir fyrirlestrana
+function el2(nafn, ...children) {
+  const element = document.createElement(name);
+  for (let child of children) {
+    if (typeof child =='string') {
+      element.appendChild(document.createTextNode(child));
+    } else if (child) {
+      element.appendChild(child);
+    }
+  }
+}
+
+//fall sem setur saman fyrirlestur
+function buaTilFyrirlestur(item) {
+    for (let i in item) {
+      console.log('a');
+    }
 }
