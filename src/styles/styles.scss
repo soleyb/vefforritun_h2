@@ -114,8 +114,7 @@ img { /* stylelint-disable-line */
 }
 .boxes__box {
   //þetta er eitt og eitt box
-  width: 33.3333%;
-  height: 33.3333vh;
+  width: 100%;
   padding-left: 0.5*$gutter;
   padding-right: 0.5*$gutter;
   margin-bottom: $gutter;
@@ -164,7 +163,8 @@ img { /* stylelint-disable-line */
   }
   //box í index.html
   .boxes__box__bg {
-    width: 100%;
+    width: 33.3333%;
+    height: 33.3333vh;
   }
   //texti í fyrirlestur.html
   .fyrirlestur__texti__bg {
