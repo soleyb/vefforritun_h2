@@ -124,10 +124,12 @@ img { /* stylelint-disable-line */
 .boxes__mynd {
   //thumbnailið innan í box
   width: 100%;
+  flex-grow: 1;
 }
 .boxes__fyrirsogn {
   //fyrirsagnirnar í gráu boxunum
   background-color: $lightgrey;
+//  flex-grow: 1;
 }
 .boxes__fyrirsogn__titill {
   //titillinn á fyrirlestrinum
@@ -164,7 +166,7 @@ img { /* stylelint-disable-line */
   //box í index.html
   .boxes__box__bg {
     width: 33.3333%;
-    height: 33.3333vh;
+    height: 33.3333%;
   }
   //texti í fyrirlestur.html
   .fyrirlestur__texti__bg {

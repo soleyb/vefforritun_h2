@@ -78,7 +78,10 @@ function el(nafn, ...children) {
   for (let child of children) {
     if(nafn == 'img') {
       //ef við erum að vinna í mynd
-      element.src = child;
+      if(child != null){
+        element.src = child;
+      }
+      else{}
     }
     else if(typeof child == 'string'){
       //ef við erum að vinna með börn sem eru textar
