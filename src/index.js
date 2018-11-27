@@ -1,5 +1,5 @@
 import List from './lib/list';
-
+let valinn = 'bla';
 
 document.addEventListener('DOMContentLoaded', () => {
   const page = document.querySelector('body');
@@ -27,12 +27,28 @@ function makeGreen(e) {
   saekjaFyrirlestra();
 }
 
+//Fallið fá fyrirlestur fær allar upplýsingar um fyrirlestur sem smellt er á
+function faFyrirlestur(e) {
+  let slug = '';
+  let a = e.target;
+  let i = 0;
+  while(i<4) {
+    if(a.id!=slug) {
+      slug = a.id;
+      break;
+    }
+    a = a.parentNode;
+    i++;
+  }
+  return slug;
+}
+
 //finnur alla takka sem eru grænir
 function allGreens() {
   var graenir = [];
   var i = 0;
   for(let t of document.querySelector('.takkar').children) {
-    if(t.classList.contains("takkar__takki--merkt")){
+    if(t.classList.contains('takkar__takki--merkt')){
       graenir[i] = t.textContent.toLowerCase();
       i++;
     }
@@ -81,7 +97,9 @@ function el(nafn, ...children) {
       if(child != null){
         element.src = child;
       }
-      else{}
+      else{
+        return element;
+      }
     }
     else if(typeof child == 'string'){
       //ef við erum að vinna með börn sem eru textar
@@ -97,36 +115,40 @@ function el(nafn, ...children) {
 
 //Fall til að búa til boxin af fyrirlestrum
 function setjaSaman(item) {
-  var noda = document.querySelector(".boxes");
+  var noda = document.querySelector('.boxes');
   while(noda.firstChild) {
     noda.removeChild(noda.firstChild);
   }
   let n=item.length; //fjöldi fyrirlestra sem við ítrum í gegnum
   let i=0;
   while(i<n){
-
     if(item[i].thumbnail==null){
       item[i].thumbnail='img/thumbnone.jpg';
     }
     //búum til boxið, köllum það result
     const result = el(
-      'div',
-      el('img', item[i].thumbnail),
-      el('div',
-        el('h4', item[i].category),
-        el('h3', item[i].title)
+      'div', el(
+        'a', el('img', item[i].thumbnail),
+        el('div',
+          el('h4', item[i].category),
+          el('h3', item[i].title)
+        )
       )
     );
 
     //setjum boxið inn í index.html
-    document.querySelector(".boxes").appendChild(result);
+    document.querySelector('.boxes').appendChild(result);
     //bætum við klösum
-    result.classList.add("boxes__box");
-    result.classList.add("boxes__box__bg");
-    result.querySelector("img").classList.add("boxes__mynd");
-    result.querySelector("div").classList.add("boxes__fyrirsogn");
-    result.querySelector("h4").classList.add("boxes__fyrirsogn__flokkur");
-    result.querySelector("h3").classList.add("boxes__fyrirsogn__titill");
+    result.classList.add('boxes__box');
+    result.classList.add('boxes__box__bg');
+    result.setAttribute('id', item[i].slug);
+    result.addEventListener('click', faFyrirlestur);
+    result.querySelector('a').classList.add('boxes__a');
+    result.querySelector('a').setAttribute('href','fyrirlestur.html');
+    result.querySelector('img').classList.add('boxes__mynd');
+    result.querySelector('div').classList.add('boxes__fyrirsogn');
+    result.querySelector('h4').classList.add('boxes__fyrirsogn__flokkur');
+    result.querySelector('h3').classList.add('boxes__fyrirsogn__titill');
     i++;
   }
 }
