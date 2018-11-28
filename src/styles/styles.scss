@@ -26,6 +26,12 @@ img { /* stylelint-disable-line */
   max-width: 100%;
 }
 
+.img__nothumb {
+  min-height: 150px;
+  // Þarf að láta textann í reitnum fara niður.
+  background-color: $darkgrey;
+}
+
 //stillingar í hausi á index.html
 .haus {
   display: flex;
@@ -64,6 +70,7 @@ img { /* stylelint-disable-line */
 
 //stillingar í hausi á fyrirlestur.html sem eru öðruvísi en í index
 .haus2 {
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   align-content: center;
@@ -71,7 +78,7 @@ img { /* stylelint-disable-line */
   width: 100%;
   min-height: 80vh;
 
-  background: url("../img/code.jpg") no-repeat center center fixed;
+  //background: url("../img/code.jpg") no-repeat center center fixed;
   background-color: rgba(0, 0, 0, 0.6);
   background-size: cover;
 }
