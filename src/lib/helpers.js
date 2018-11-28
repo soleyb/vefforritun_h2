@@ -10,7 +10,7 @@ export function empty(element) {
 export function el(nafn, ...children) {
   const element = document.createElement(nafn);
   Array.from(children).forEach((child) => {
-    if (nafn === 'img') {
+    if (nafn === 'img' || nafn === 'iframe') {
       // ef við erum að vinna í mynd
       if (child !== null) {
         element.src = child;

@@ -2,8 +2,32 @@ import { el, empty } from './lib/helpers';
 
 
 // ------------------------------- //
+// ---------- Universal ---------- //
+// ------------------------------- //
+
+
+function saekjaFyrirlestra() {
+  return fetch('../lectures.json')
+    .then(res => res.json())
+    .catch(error => console.error('Villa við að sækja gögn', error));
+}
+
+
+// ------------------------------- //
 // ----------- Forsíða ----------- //
 // ------------------------------- //
+
+// Finnur alla takka sem eru grænir
+function graenirTakkar() {
+  const graenir = [];
+  const { children } = document.querySelector('.takkar');
+  Array.from(children).forEach((child) => {
+    if (child.classList.contains('takkar__takki--merkt')) {
+      graenir.push(child.textContent.toLowerCase());
+    }
+  });
+  return graenir;
+}
 
 // Síar í burtu alla fyrirlestra sem eru ekki í völdum flokkum.
 function merktirFyrirlestrar(lects) {
@@ -20,19 +44,15 @@ function merktirFyrirlestrar(lects) {
 function makeGreen(e) {
   e.target.classList.toggle('takkar__takki');
   e.target.classList.toggle('takkar__takki--merkt');
-  saekjaFyrirlestra();
 }
 
-// Finnur alla takka sem eru grænir
-function graenirTakkar() {
-  const graenir = [];
-  const { children } = document.querySelector('.takkar');
-  Array.from(children).forEach((child) => {
-    if (child.classList.contains('takkar__takki--merkt')) {
-      graenir.push(child.textContent.toLowerCase());
-    }
-  });
-  return graenir;
+// Sækir upplýsingar um fyrirlestur sem smellt er á.
+// Setur slugID á þeim fyrirlestri í localStorage.
+function saekjaFyrirlestur(e) {
+  let node = e.target;
+  while (!node.classList.contains('boxes__box')) node = node.parentNode;
+  const slug = node.id;
+  window.localStorage.setItem('slug', slug);
 }
 
 // Fall til að búa til boxin af fyrirlestrum á forsíðu.
@@ -42,19 +62,13 @@ function setjaSamanBoxes(lects) {
   empty(boxes);
 
   Array.from(lects).forEach((lect) => {
-    // TODO Fjarlægja if lykkju.
-    if (lect.thumbnail == null && false) {
-      lect.thumbnail = 'img/thumbnone.jpg';
-    }
     // Búum til boxið, köllum það box
     const box = el('div',
       el('a',
-        el('img', lect.thumbnail),
+        el('img', lect.thumbnail === undefined ? '' : lect.thumbnail),
         el('div',
           el('h4', lect.category),
-          el('h3', lect.title)),
-      ),
-    );
+          el('h3', lect.title))));
 
     // Setjum boxið inn í index.html
     boxes.appendChild(box);
@@ -67,10 +81,12 @@ function setjaSamanBoxes(lects) {
     box.querySelector('a').classList.add('boxes__a');
     box.querySelector('a').setAttribute('href', 'fyrirlestur.html');
     box.querySelector('img').classList.add('boxes__mynd');
-    if (lect.thumbnail === null) box.classList.add('img__nothumb');
     box.querySelector('div').classList.add('boxes__fyrirsogn');
     box.querySelector('h4').classList.add('boxes__fyrirsogn__flokkur');
     box.querySelector('h3').classList.add('boxes__fyrirsogn__titill');
+    if (lect.thumbnail === undefined) {
+      box.querySelector('img').classList.add('img__nothumb');
+    }
   });
 }
 
@@ -81,14 +97,13 @@ function valdiFyrirlestur(lects, slugid) {
   return filtered === null ? null : filtered[0];
 }
 
-// Fallið fá fyrirlestur fær allar upplýsingar um fyrirlestur sem smellt er á
-// Sækir upplýsingar um fyrirlestur sem smellt er á.
-// Setur slugID á þeim fyrirlestri í localStorage.
-function saekjaFyrirlestur(e) {
-  let node = e.target;
-  while (!node.classList.contains('boxes__box')) node = node.parentNode;
-  const slug = node.id;
-  window.localStorage.setItem('slug', slug);
+// Sækir fyrirlestra og upplýsingar um þá í json hlut.
+function hladaBoxes() {
+  saekjaFyrirlestra()
+    .then((data) => {
+      const item = merktirFyrirlestrar(data.lectures);
+      setjaSamanBoxes(item);
+    });
 }
 
 
@@ -98,27 +113,59 @@ function saekjaFyrirlestur(e) {
 
 
 // Fall sem setur saman fyrirlestur á fyrirlestrarsíðu.
-function buaTilFyrirlestur(item) {
-  // TODO Hverju er verið kalla með???
-  console.log(item);
-}
+function buaTilFyrirlestur(lecture) {
+  console.log(lecture);
+  // TODO Klára þetta fall.
+  const page = document.querySelector('.efni');
+  const {
+    category,
+    content,
+    image,
+    title,
+  } = lecture; // +slug +thumbnail
 
+  document.querySelector('.haus2').appendChild(el('img', image));
+  document.querySelector('.haus2').appendChild(el('h3', category));
+  document.querySelector('.haus2').appendChild(el('h1', title));
 
-// ------------------------------- //
-// ---------- Universal ---------- //
-// ------------------------------- //
-
-
-// Sækir fyrirlestra og upplýsingar um þá í json hlut.
-function saekjaFyrirlestra() {
-  fetch('../lectures.json')
-    .then(res => res.json())
-    .then((data) => {
-      const body = document.querySelector('body');
-      const item = merktirFyrirlestrar(data.lectures);
-      setjaSamanBoxes(item);
-    })
-    .catch(error => console.error('Villa við að sækja gögn', error));
+  content.forEach((element) => {
+    switch (element.type) {
+      case 'youtube':
+        const elem = el('iframe', element.data);
+        elem.setAttribute('width', '1280');
+        elem.setAttribute('height', '720');
+        elem.setAttribute('frameborder', '0');
+        elem.setAttribute('allowfullscreen', '');
+        page.appendChild(elem);
+        break;
+      case 'text':
+        page.appendChild(el('p', element.data));
+        break;
+      case 'quote':
+        page.appendChild(el('quote', element.data));
+        break;
+      case 'image':
+        page.appendChild(el('img', element.data));
+        page.appendChild(el('p', element.caption));
+        break;
+      case 'heading':
+        page.appendChild(el('h2', element.data));
+        break;
+      case 'list':
+        // TODO Fix this
+        // þetta virkar ekki alveg. Þarf að láta allt í element.data
+        // fara í li sem er svo allt inní ul
+        page.appendChild(el('ul',
+          Array.from(element.data).map((li) => {
+            el('li',li);
+          })));
+        break;
+      case 'code':
+        break;
+      default:
+        break;
+    }
+  });
 }
 
 // Main fall sem keyrir allt.
@@ -127,17 +174,21 @@ document.addEventListener('DOMContentLoaded', () => {
   const isLecturePage = page.classList.contains('lecture-page');
 
   if (isLecturePage) {
-    // Slug er slugið fyrir valinn fyrirlestur
-    const slug = window.localStorage.getItem('slug');
-    const fyrirlestur = valdiFyrirlestur(slug);
-    buaTilFyrirlestur(fyrirlestur);
+    saekjaFyrirlestra().then((data) => {
+      // Slug er slugið fyrir valinn fyrirlestur
+      const slug = window.localStorage.getItem('slug');
+      const fyrirlestur = valdiFyrirlestur(data.lectures, slug);
+      buaTilFyrirlestur(fyrirlestur);
+    });
   } else {
-    saekjaFyrirlestra();
+    hladaBoxes();
 
     // EventListener fyrir að gera takkana græna
+    // og endurhlaða fyrirlestralista
     const { children } = document.querySelector('.takkar');
     Array.from(children).forEach((child) => {
       child.addEventListener('click', makeGreen);
+      child.addEventListener('click', hladaBoxes);
     });
   }
 });
