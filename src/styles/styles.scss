@@ -12,12 +12,11 @@
 }
 
 html { /* stylelint-disable-line */
+  min-width: 400px;
+
   box-sizing: border-box;
   overflow-x: hidden;
   overflow-y: scroll; // alltaf hafa y skrollbar
-
-  //bætti við
-  min-width: 400px;
 
   font-family: $font-main;
   font-size: 16px;
@@ -29,45 +28,52 @@ img { /* stylelint-disable-line */
 
 //stillingar í hausi á index.html
 .haus {
-  min-height: 80vh;
-  width: 100%;
   display: flex;
   flex-wrap: wrap;
   align-content: center;
+
+  width: 100%;
+  min-height: 80vh;
 
   background: url("../img/header.jpg") no-repeat center center fixed;
   background-color: rgba(0, 0, 0, 0.6);
   background-size: cover;
 
   &__h1 {
-    color: $black;
-    text-align: center;
     width: 100%;
     margin-top: $gutter;
+
     font-family: $font-heading;
     font-size: 48px;
+    color: $black;
+
+    text-align: center;
   }
 
   &__fag {
-    color: $black;
-    text-transform: uppercase;
-    text-align: center;
     width: 100%;
+
     font-family: $font-heading;
     font-size: 24px;
+    color: $black;
+
+    text-align: center;
+    text-transform: uppercase;
   }
 }
 
 //stillingar í hausi á fyrirlestur.html sem eru öðruvísi en í index
 .haus2 {
-  background: url("../img/code.jpg") no-repeat center center fixed;
-  background-color: rgba(0, 0, 0, 0.6);
-  background-size: cover;
-  min-height: 80vh;
-  width: 100%;
   display: flex;
   flex-wrap: wrap;
   align-content: center;
+
+  width: 100%;
+  min-height: 80vh;
+
+  background: url("../img/code.jpg") no-repeat center center fixed;
+  background-color: rgba(0, 0, 0, 0.6);
+  background-size: cover;
 }
 
 //stillingar á efni sem er ekki í haus
@@ -79,57 +85,67 @@ img { /* stylelint-disable-line */
   display: flex;
   flex-wrap: nowrap;
   justify-content: center;
+
   margin-top: 2em;
   margin-bottom: 2em;
 
   &__takki {
-    border-radius: 10px;
-    background-color: $lightgrey;
+    padding: 10px;
+    margin-right: 5px;
+    margin-left: 5px;
+
     font-family: $font-heading;
     font-size: 24px;
     font-weight: bold;
-    padding: 10px;
-    margin-left: 5px;
-    margin-right: 5px;
+
+    background-color: $lightgrey;
+    border-radius: 10px;
   }
 
   &__takki--merkt {
-    border-radius: 10px;
-    background-color: $lime;
+    padding: 10px;
+    margin-right: 5px;
+    margin-left: 5px;
+
     font-family: $font-heading;
     font-size: 24px;
     font-weight: bold;
-    padding: 10px;
-    margin-left: 5px;
-    margin-right: 5px;
+
+    background-color: $lime;
+    border-radius: 10px;
   }
 }
 
 //stillingar á boxum sem fyrirlestrarnir eru í
 .boxes {
   //þetta er utan um öll boxin
-  width: 100%;
-  padding: 0.5*$gutter;
   display: flex;
   flex-wrap: wrap;
+
+  width: 100%;
+
+  padding: 0.5*$gutter;
 }
 
 .boxes__box {
   //þetta er eitt og eitt box
   width: 100%;
-  padding-left: 0.5*$gutter;
+
   padding-right: 0.5*$gutter;
+  padding-left: 0.5*$gutter;
   margin-bottom: $gutter;
 }
 
 .boxes__a {
-  margin: 0;
-  padding: 0;
-  text-decoration: none;
-  color: $black;
   display: flex;
   flex-flow: column;
   align-items: stretch;
+
+  padding: 0;
+  margin: 0;
+
+  color: $black;
+  text-decoration: none;
 }
 
 .boxes__mynd {
@@ -140,20 +156,20 @@ img { /* stylelint-disable-line */
 
 .boxes__fyrirsogn {
   //fyrirsagnirnar í gráu boxunum
-  background-color: $lightgrey;
   padding: 0.5em;
+  background-color: $lightgrey;
 }
 
 .boxes__fyrirsogn__titill {
   //titillinn á fyrirlestrinum
-  font-size: 1.5em;
   font-family: $font-heading;
+  font-size: 1.5em;
 }
 
 .boxes__fyrirsogn__flokkur {
   //flokkurinn á fyrirlestrinum (category, html/css/javascript)
-  font-size: 0.75em;
   font-family: $font-heading;
+  font-size: 0.75em;
   text-transform: uppercase;
 }
 
