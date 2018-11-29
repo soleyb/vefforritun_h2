@@ -173,6 +173,7 @@ function buaTilFyrirlestur(lecture) {
 
   content.forEach((element) => {
     let child;
+    let sub;
     switch (element.type) {
       case 'youtube':
         child = el('iframe', element.data);
@@ -182,7 +183,11 @@ function buaTilFyrirlestur(lecture) {
         child.setAttribute('allowfullscreen', '');
         break;
       case 'text':
-        child = el('div', ...element.data.split('\n').map(x => el('p', x)));
+        child = el('div', ...element.data.split('\n').map((x) => {
+          sub = el('p', x);
+          sub.classList.add('texti__balkur');
+          return sub;
+        }));
         child.classList.add('efni__balkur');
         break;
       case 'quote':
@@ -192,7 +197,11 @@ function buaTilFyrirlestur(lecture) {
         break;
       case 'image':
         child = el('figure', el('img', element.data));
-        if (element.caption !== undefined) child.appendChild(el('figcaption', element.caption));
+        if (element.caption !== undefined) {
+          sub = el('figcaption', element.caption);
+          sub.classList.add('efni__mynd__texti');
+          child.appendChild(sub);
+        }
         child.classList.add('efni__myndtexti');
         break;
       case 'heading':
@@ -200,7 +209,11 @@ function buaTilFyrirlestur(lecture) {
         child.classList.add('efni__fyrirsogn');
         break;
       case 'list':
-        child = el('ul', ...Array.from(element.data).map(x => el('li', x)));
+        child = el('ul', ...Array.from(element.data).map((x) => {
+          sub = el('li', x);
+          sub.classList.add('efni__listi__li');
+          return sub;
+        }));
         child.classList.add('efni__listi');
         break;
       case 'code':
