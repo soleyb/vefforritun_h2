@@ -119,7 +119,7 @@ function hladaBoxes() {
 function klaraFyrirlestur() {
   let local = JSON.parse(localStorage.getItem('klaradirFyrirlestrar'));
   const slug = getSlug();
-  console.log(slug)
+  //console.log(slug)
 
   // Ef enginn fyrirlestur hefur verið kláraður skráum við þennan sem fyrsta
   // Annars togglum við hvort hann sé búinn.
@@ -146,9 +146,17 @@ function buaTilFyrirlestur(lecture) {
   klaraTakki.addEventListener('click', klaraFyrirlestur);
 
   // Hér kemur HTML uppsetningin á síðunni.
-  document.querySelector('.haus2').appendChild(el('img', image));
-  document.querySelector('.haus2').appendChild(el('h3', category));
-  document.querySelector('.haus2').appendChild(el('h1', title));
+  let haus2_img = el('img', image);
+  let haus2_h1 = el('h1', title);
+  let haus2_h3 = el('h3', category);
+
+  haus2_img.classList.add('haus2__mynd');
+  haus2_h1.classList.add('haus2__titill');
+  haus2_h3.classList.add('haus2__undirtitill');
+
+  document.querySelector('.haus2').appendChild(haus2_img);
+  document.querySelector('.haus2').appendChild(haus2_h1);
+  document.querySelector('.haus2').appendChild(haus2_h3);
 
   content.forEach((element) => {
     let child;

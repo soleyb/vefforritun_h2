@@ -67,6 +67,7 @@ img { /* stylelint-disable-line */
   }
 }
 
+
 //stillingar í hausi á fyrirlestur.html sem eru öðruvísi en í index
 .haus2 {
   position: relative;
@@ -79,25 +80,26 @@ img { /* stylelint-disable-line */
   min-height: 80vh;
 
   font-family: $font-heading;
+  text-align: center;
   //background: url("../img/code.jpg") no-repeat center center fixed;
   background-color: rgba(0, 0, 0, 0.6);
   background-size: cover;
-  text-align: center;
 
-  img {
+  &__mynd {
 	width: 100%;
+	object-fit: cover;
   }
 
-  h1, h3 {
+  &__titill, &__undirtitill {
 	position: absolute;
   }
 
-  h1 {
+  &__titill {
 	margin-top: 50px;
     font-size: 3em;
   }
 
-  h3 {
+  &__undirtitill {
 	margin-bottom: 50px;
   }
 }
@@ -110,18 +112,14 @@ img { /* stylelint-disable-line */
 
   font-family: $font-main-serif;
 
-  iframe {
-	margin-bottom: $gutter;
-  }
-
   &__fyrirsogn, &__balkur, &__listi, &__kodi {
-	padding-left: $gutter;
 	padding-right: $gutter;
+	padding-left: $gutter;
   }
 
   &__balkur {
+	margin-bottom: $gutter;
 	line-height: 1.5;
-	margin-bottom:$gutter;
 
 	  p {
 	    margin-bottom: $gutter;
@@ -129,12 +127,11 @@ img { /* stylelint-disable-line */
   }
 
   &__fyrirsogn {
-  	font-family: $font-heading;
-	font-size: 2em;
 	margin-top: $gutter*2;
 	margin-bottom: $gutter;
+  	font-family: $font-heading;
+	font-size: 2em;
   }
-
 
   &__listi {
 	li {
@@ -143,10 +140,10 @@ img { /* stylelint-disable-line */
   }
 
   &__myndtexti {
-    padding-left: $gutter;
     padding-right: $gutter;
-	margin-bottom: $gutter;
+    padding-left: $gutter;
 	margin-top: $gutter*2;
+	margin-bottom: $gutter;
 
 	figcaption {
 	  font-style: italic;
@@ -158,8 +155,8 @@ img { /* stylelint-disable-line */
 	padding: $gutter;
 	padding-top: $gutter;
 	padding-right: 40px;
-	background-color: $lightgrey;
 	margin-bottom: $gutter;
+	background-color: $lightgrey;
   }
 
   &__kodi {
@@ -168,10 +165,10 @@ img { /* stylelint-disable-line */
 }
 
 nav {
-  font-family: $font-heading;
-  text-align: center;
   margin-top: 60px;
   margin-bottom: 60px;
+  font-family: $font-heading;
+  text-align: center;
 
   ul {
   	list-style-type: none;
@@ -187,11 +184,11 @@ nav {
 }
 
 .takkar__klara {
-  background: none;
-  border: none;
-  cursor: pointer;
   font-family: inherit;
   font-size: inherit;
+  cursor: pointer;
+  background: none;
+  border: 0;
 }
 
 .takkar {
@@ -321,4 +318,8 @@ nav {
     width: 66.6667%;
   }
 
+  .lecture-page {
+    max-width:100% * (8 / 12);
+	margin: 0 auto;
+  }
 }
