@@ -172,12 +172,6 @@ function buaTilFyrirlestur(lecture) {
   document.querySelector('.haus2').appendChild(haus2_h1);
   document.querySelector('.haus2').appendChild(haus2_h3);
 
-  if (klaradirFyrirlestrar().includes(lecture.slug)) {
-    const takki = document.querySelector('.takkar__klara')
-    takki.classList.add('takkar__klara__buinn');
-    takki.innerHTML = '✔ Fyrirlestur kláraður'
-  }
-
   content.forEach((element) => {
     let child;
     switch (element.type) {
@@ -219,6 +213,12 @@ function buaTilFyrirlestur(lecture) {
     }
     page.appendChild(child);
   });
+
+  if (klaradirFyrirlestrar().includes(lecture.slug)) {
+    const takki = document.querySelector('.takkar__klara')
+    takki.classList.add('takkar__klara__buinn');
+    takki.innerHTML = '✔ Fyrirlestur kláraður'
+  }
 }
 
 
