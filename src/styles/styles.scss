@@ -125,9 +125,10 @@ img { /* stylelint-disable-line */
     margin-bottom: $gutter;
     line-height: 1.5;
 
-    p {
-      margin-bottom: $gutter;
-    }
+  }
+
+  .texti__balkur {
+    margin-bottom: $gutter;
   }
 
   &__fyrirsogn {
@@ -138,9 +139,9 @@ img { /* stylelint-disable-line */
   }
 
   &__listi {
-	li {
-	  margin-bottom: $gutter;
-	}
+    &__li {
+      margin-bottom: $gutter;
+    }
   }
 
   &__myndtexti {
@@ -148,10 +149,10 @@ img { /* stylelint-disable-line */
     padding-left: $gutter;
     margin-top: $gutter*2;
     margin-bottom: $gutter;
+  }
 
-	figcaption {
-	  font-style: italic;
-	}
+  &__mynd__texti {
+    font-style: italic;
   }
 
   &__tilvitnun {
@@ -166,20 +167,20 @@ img { /* stylelint-disable-line */
   &__kodi {
     margin-bottom: $gutter;
   }
-}
 
-nav {
-  margin-top: 60px;
-  margin-bottom: 60px;
-  font-family: $font-heading;
-  text-align: center;
+  &__nav {
+    margin-top: 60px;
+    margin-bottom: 60px;
+    font-family: $font-heading;
+    text-align: center;
+  }
 
-  ul {
-  	list-style-type: none;
+  &__ul {
+    list-style-type: none;
+  }
 
-	li {
-	  margin: 10px;
-	}
+  &__li {
+    margin: 10px;
   }
 }
 
@@ -270,6 +271,7 @@ nav {
     text-decoration: none;
 
     transition: background-color 300ms ease-in-out;
+
     &:hover {
       background-color: $protection;
       transition: background-color 300ms ease-in-out;
@@ -310,8 +312,8 @@ nav {
 
   &__fyrirsogn__uncheck {
     //checkmarkið sem er á kláruðum fyrirlestrum
-    color: $lime;
     display: none;
+    color: $lime;
   }
 
   &__fyrirsogn__check {
@@ -356,7 +358,7 @@ nav {
   }
 
   .container {
-    max-width:100% * (8 / 12);
-	margin: 0 auto;
+    max-width: 100% * (8 / 12);
+    margin: 0 auto;
   }
 }
