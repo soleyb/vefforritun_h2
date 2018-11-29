@@ -141,12 +141,12 @@ function buaTilFyrirlestur(lecture) {
         child = el('div', ...element.data.split('\n').map(x => el('p', x)));
         break;
       case 'quote':
-        child = el('blockquote', element.data);
+        child = el('blockquote', el('p', element.data));
         if (element.caption !== undefined) child.appendChild(el('cite', element.attribute));
         break;
       case 'image':
-        child = el('div', el('img', element.data));
-        if (element.caption !== undefined) child.appendChild(el('p', element.caption));
+        child = el('figure', el('img', element.data));
+        if (element.caption !== undefined) child.appendChild(el('figcaption', element.caption));
         break;
       case 'heading':
         child = el('h2', element.data);
