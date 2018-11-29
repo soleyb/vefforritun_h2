@@ -133,6 +133,15 @@ function klaraFyrirlestur() {
   localStorage.setItem('klaradirFyrirlestrar', JSON.stringify(local));
 
   // HTML partur
+  const takki = document.querySelector('.takkar__klara');
+  if (takki.innerHTML === 'Klára fyrirlestur') {
+    takki.innerHTML = '✔ Fyrirlestur kláraður'
+    takki.classList.add('takkar__klara__buinn');
+  }
+  else {
+    takki.innerHTML = 'Klára fyrirlestur'
+    takki.classList.remove('takkar__klara__buinn');
+  }
 }
 
 // Fall sem setur saman fyrirlestur á fyrirlestrarsíðu.
@@ -143,7 +152,8 @@ function buaTilFyrirlestur(lecture) {
     content,
     image,
     title,
-  } = lecture; // +slug +thumbnail eru til staðar
+    slug,
+  } = lecture; // +thumbnail eru til staðar
 
   // Event listeners fyrir fyrirlestrasíðu.
   const klaraTakki = document.querySelector('.takkar__klara');
@@ -153,6 +163,11 @@ function buaTilFyrirlestur(lecture) {
   document.querySelector('.haus2').appendChild(el('img', image));
   document.querySelector('.haus2').appendChild(el('h3', category));
   document.querySelector('.haus2').appendChild(el('h1', title));
+  if (klaradirFyrirlestrar().includes(lecture.slug)) {
+    const takki = document.querySelector('.takkar__klara')
+    takki.classList.add('takkar__klara__buinn');
+    takki.innerHTML = '✔ Fyrirlestur kláraður'
+  }
 
   content.forEach((element) => {
     let child;
@@ -170,7 +185,7 @@ function buaTilFyrirlestur(lecture) {
         break;
       case 'quote':
         child = el('blockquote', el('p', element.data));
-        if (element.caption !== undefined) child.appendChild(el('cite', element.attribute));
+        if (element.attribute !== undefined) child.appendChild(el('cite', element.attribute));
 		child.classList.add('efni__tilvitnun');
         break;
       case 'image':
