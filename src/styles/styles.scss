@@ -119,6 +119,8 @@ img { /* stylelint-disable-line */
 //stillingar á efni sem er ekki í haus
 .efni {
   max-width: $max-width;
+  padding-right: $gutter;
+  padding-left: $gutter;
   margin-right: auto;
   margin-left: auto;
 
