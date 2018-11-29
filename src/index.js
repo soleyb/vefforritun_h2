@@ -71,7 +71,7 @@ function setjaSamanBoxes(lects) {
           el('h4', lect.category),
           el('div',
             el('h3', lect.title),
-            el('span','✔')))));
+            el('span', '✔')))));
 
     // Setjum boxið inn í index.html
     boxes.appendChild(box);
@@ -135,11 +135,10 @@ function klaraFyrirlestur() {
   // HTML partur
   const takki = document.querySelector('.takkar__klara');
   if (takki.innerHTML === 'Klára fyrirlestur') {
-    takki.innerHTML = '✔ Fyrirlestur kláraður'
+    takki.innerHTML = '✔ Fyrirlestur kláraður';
     takki.classList.add('takkar__klara__buinn');
-  }
-  else {
-    takki.innerHTML = 'Klára fyrirlestur'
+  } else {
+    takki.innerHTML = 'Klára fyrirlestur';
     takki.classList.remove('takkar__klara__buinn');
   }
 }
@@ -160,17 +159,17 @@ function buaTilFyrirlestur(lecture) {
   klaraTakki.addEventListener('click', klaraFyrirlestur);
 
   // Hér kemur HTML uppsetningin á síðunni.
-  let haus2_img = el('img', image);
-  let haus2_h1 = el('h1', title);
-  let haus2_h3 = el('h3', category);
+  const haus2img = el('img', image);
+  const haus2h1 = el('h1', title);
+  const haus2h3 = el('h3', category);
 
-  haus2_img.classList.add('haus2__mynd');
-  haus2_h1.classList.add('haus2__titill');
-  haus2_h3.classList.add('haus2__undirtitill');
+  haus2img.classList.add('haus2__mynd');
+  haus2h1.classList.add('haus2__titill');
+  haus2h3.classList.add('haus2__undirtitill');
 
-  document.querySelector('.haus2').appendChild(haus2_img);
-  document.querySelector('.haus2').appendChild(haus2_h1);
-  document.querySelector('.haus2').appendChild(haus2_h3);
+  document.querySelector('.haus2').appendChild(haus2img);
+  document.querySelector('.haus2').appendChild(haus2h1);
+  document.querySelector('.haus2').appendChild(haus2h3);
 
   content.forEach((element) => {
     let child;
@@ -184,12 +183,12 @@ function buaTilFyrirlestur(lecture) {
         break;
       case 'text':
         child = el('div', ...element.data.split('\n').map(x => el('p', x)));
-		child.classList.add('efni__balkur');
+        child.classList.add('efni__balkur');
         break;
       case 'quote':
         child = el('blockquote', el('p', element.data));
         if (element.attribute !== undefined) child.appendChild(el('cite', element.attribute));
-		child.classList.add('efni__tilvitnun');
+        child.classList.add('efni__tilvitnun');
         break;
       case 'image':
         child = el('figure', el('img', element.data));
@@ -198,15 +197,15 @@ function buaTilFyrirlestur(lecture) {
         break;
       case 'heading':
         child = el('h2', element.data);
-		child.classList.add('efni__fyrirsogn');
+        child.classList.add('efni__fyrirsogn');
         break;
       case 'list':
         child = el('ul', ...Array.from(element.data).map(x => el('li', x)));
-		child.classList.add('efni__listi');
+        child.classList.add('efni__listi');
         break;
       case 'code':
         child = el('pre', ...Array.from(element.data).map(x => el('code', x)));
-		child.classList.add('efni__kodi');
+        child.classList.add('efni__kodi');
         break;
       default:
         break;
@@ -214,10 +213,10 @@ function buaTilFyrirlestur(lecture) {
     page.appendChild(child);
   });
 
-  if (klaradirFyrirlestrar().includes(lecture.slug)) {
-    const takki = document.querySelector('.takkar__klara')
+  if (klaradirFyrirlestrar().includes(slug)) {
+    const takki = document.querySelector('.takkar__klara');
     takki.classList.add('takkar__klara__buinn');
-    takki.innerHTML = '✔ Fyrirlestur kláraður'
+    takki.innerHTML = '✔ Fyrirlestur kláraður';
   }
 }
 
