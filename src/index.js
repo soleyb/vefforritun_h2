@@ -69,7 +69,9 @@ function setjaSamanBoxes(lects) {
         el('img', lect.thumbnail === undefined ? '' : lect.thumbnail),
         el('div',
           el('h4', lect.category),
-          el('h3', lect.title))));
+          el('div',
+            el('h3', lect.title),
+            el('span','✔')))));
 
     // Setjum boxið inn í index.html
     boxes.appendChild(box);
@@ -83,7 +85,10 @@ function setjaSamanBoxes(lects) {
     box.querySelector('img').classList.add('boxes__mynd');
     box.querySelector('div').classList.add('boxes__fyrirsogn');
     box.querySelector('h4').classList.add('boxes__fyrirsogn__flokkur');
+    box.querySelector('div > div').classList.add('boxes__fyrirsogn__titilcheck');
     box.querySelector('h3').classList.add('boxes__fyrirsogn__titill');
+    if (klaradirFyrirlestrar().includes(lect.slug)) box.querySelector('span').classList.add('boxes__fyrirsogn__check');
+    else box.querySelector('span').classList.add('boxes__fyrirsogn__uncheck');
     if (lect.thumbnail === undefined) {
       box.querySelector('img').classList.add('img__nothumb');
     }
@@ -119,7 +124,6 @@ function hladaBoxes() {
 function klaraFyrirlestur() {
   let local = JSON.parse(localStorage.getItem('klaradirFyrirlestrar'));
   const slug = getSlug();
-  console.log(slug)
 
   // Ef enginn fyrirlestur hefur verið kláraður skráum við þennan sem fyrsta
   // Annars togglum við hvort hann sé búinn.

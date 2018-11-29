@@ -288,6 +288,24 @@ nav {
     font-size: 0.75em;
     text-transform: uppercase;
   }
+
+  &__fyrirsogn__titilcheck {
+    //kassi til að staðsetja check á réttan stað
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  &__fyrirsogn__uncheck {
+    //checkmarkið sem er á kláruðum fyrirlestrum
+    color: $lime;
+    display: none;
+  }
+
+  &__fyrirsogn__check {
+    //checkmarkið sem er á kláruðum fyrirlestrum
+    color: $lime;
+  }
 }
 
 //stillingar fyrir fyrirlestur.html
