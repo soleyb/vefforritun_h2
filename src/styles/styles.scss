@@ -67,7 +67,6 @@ img { /* stylelint-disable-line */
   }
 }
 
-
 //stillingar í hausi á fyrirlestur.html sem eru öðruvísi en í index
 .haus2 {
   position: relative;
@@ -86,21 +85,21 @@ img { /* stylelint-disable-line */
   background-size: cover;
 
   &__mynd {
-	width: 100%;
-	object-fit: cover;
+    width: 100%;
+    object-fit: cover;
   }
 
-  &__titill, &__undirtitill {
-	position: absolute;
+  &__titill &__undirtitill {
+    position: absolute;
   }
 
   &__titill {
-	margin-top: 50px;
+    margin-top: 50px;
     font-size: 3em;
   }
 
   &__undirtitill {
-	margin-bottom: 50px;
+    margin-bottom: 50px;
   }
 }
 
@@ -112,25 +111,30 @@ img { /* stylelint-disable-line */
 
   font-family: $font-main-serif;
 
-  &__fyrirsogn, &__balkur, &__listi, &__kodi {
-	padding-right: $gutter;
-	padding-left: $gutter;
+  &__fyrirsogn &__balkur {
+    padding-right: $gutter;
+    padding-left: $gutter;
+  }
+
+  &__listi &__kodi {
+    padding-right: $gutter;
+    padding-left: $gutter;
   }
 
   &__balkur {
-	margin-bottom: $gutter;
-	line-height: 1.5;
+    margin-bottom: $gutter;
+    line-height: 1.5;
 
-	  p {
-	    margin-bottom: $gutter;
-	  }
+    p {
+      margin-bottom: $gutter;
+    }
   }
 
   &__fyrirsogn {
-	margin-top: $gutter*2;
-	margin-bottom: $gutter;
-  	font-family: $font-heading;
-	font-size: 2em;
+    margin-top: $gutter*2;
+    margin-bottom: $gutter;
+    font-family: $font-heading;
+    font-size: 2em;
   }
 
   &__listi {
@@ -142,8 +146,8 @@ img { /* stylelint-disable-line */
   &__myndtexti {
     padding-right: $gutter;
     padding-left: $gutter;
-	margin-top: $gutter*2;
-	margin-bottom: $gutter;
+    margin-top: $gutter*2;
+    margin-bottom: $gutter;
 
 	figcaption {
 	  font-style: italic;
@@ -151,16 +155,16 @@ img { /* stylelint-disable-line */
   }
 
   &__tilvitnun {
-	min-height: 100px;
-	padding: $gutter;
-	padding-top: $gutter;
-	padding-right: 40px;
-	margin-bottom: $gutter;
-	background-color: $lightgrey;
+    min-height: 100px;
+    padding: $gutter;
+    padding-top: $gutter;
+    padding-right: 40px;
+    margin-bottom: $gutter;
+    background-color: $lightgrey;
   }
 
   &__kodi {
-	margin-bottom: $gutter;
+    margin-bottom: $gutter;
   }
 }
 

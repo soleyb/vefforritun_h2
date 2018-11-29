@@ -173,9 +173,9 @@ function buaTilFyrirlestur(lecture) {
   document.querySelector('.haus2').appendChild(haus2_h3);
 
   if (klaradirFyrirlestrar().includes(lecture.slug)) {
-    const takki = document.querySelector('.takkar__klara')
+    const takki = document.querySelector('.takkar__klara');
     takki.classList.add('takkar__klara__buinn');
-    takki.innerHTML = '✔ Fyrirlestur kláraður'
+    takki.innerHTML = '✔ Fyrirlestur kláraður';
   }
 
   content.forEach((element) => {
