@@ -19,7 +19,7 @@ function saekjaFyrirlestra() {
 function klaradirFyrirlestrar() {
   const local = localStorage.getItem('klaradirFyrirlestrar');
   if (local === null) return [];
-  return JSON.parse(local);
+  return JSON.parse(local).slugs;
 }
 
 
@@ -87,8 +87,9 @@ function setjaSamanBoxes(lects) {
     if (lect.thumbnail === undefined) {
       box.querySelector('img').classList.add('img__nothumb');
     }
-    if (klaradirFyrirlestrar().includes(lect.slug)) {
-      box.querySelector('.box__fyrirsogn').classList.add('klaradur');
+    const kf = klaradirFyrirlestrar();
+    if (kf !== null && kf.includes(lect.slug)) {
+      box.querySelector('.boxes__fyrirsogn').classList.add('klaradur');
     }
   });
 }
@@ -122,9 +123,9 @@ function klaraFyrirlestur() {
 
   // Ef enginn fyrirlestur hefur verið kláraður skráum við þennan sem fyrsta
   // Annars togglum við hvort hann sé búinn.
-  if (local === null) local = { slugs: new Set() };
-  else if (local.slugs.has(slug)) local.slugs.delete(slug);
-  else local.slugs.add(slug);
+  if (local === null) local = { slugs: [] };
+  if (local.slugs.includes(slug)) local.slugs.splice(local.slugs.indexOf(slug), 1);
+  else local.slugs.push(slug);
   localStorage.setItem('klaradirFyrirlestrar', JSON.stringify(local));
 
   // HTML partur
