@@ -161,24 +161,29 @@ function buaTilFyrirlestur(lecture) {
         break;
       case 'text':
         child = el('div', ...element.data.split('\n').map(x => el('p', x)));
+		child.classList.add('efni__balkur');
         break;
       case 'quote':
         child = el('blockquote', el('p', element.data));
         if (element.caption !== undefined) child.appendChild(el('cite', element.attribute));
+		child.classList.add('efni__tilvitnun');
         break;
       case 'image':
         child = el('figure', el('img', element.data));
         if (element.caption !== undefined) child.appendChild(el('figcaption', element.caption));
-        child.classList.add('mynd__texti');
+        child.classList.add('efni__myndtexti');
         break;
       case 'heading':
         child = el('h2', element.data);
+		child.classList.add('efni__fyrirsogn');
         break;
       case 'list':
         child = el('ul', ...Array.from(element.data).map(x => el('li', x)));
+		child.classList.add('efni__listi');
         break;
       case 'code':
         child = el('pre', ...Array.from(element.data).map(x => el('code', x)));
+		child.classList.add('efni__kodi');
         break;
       default:
         break;
