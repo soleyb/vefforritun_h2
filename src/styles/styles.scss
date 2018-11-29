@@ -151,6 +151,7 @@ img { /* stylelint-disable-line */
     display: flex;
     flex-flow: column;
     align-items: stretch;
+	flex-grow: 1;
 
     padding: 0;
     margin: 0;
@@ -209,11 +210,6 @@ img { /* stylelint-disable-line */
   //box í index.html
   .boxes__box__bg {
     width: 33.3333%;
-  }
-
-  .boxes__a {
-	display: flex;
-	flex-grow: 1;
   }
 
   //texti í fyrirlestur.html
