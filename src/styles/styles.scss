@@ -134,52 +134,52 @@ img { /* stylelint-disable-line */
   width: 100%;
 
   padding: 0.5*$gutter;
-}
 
-.boxes__box {
-  //þetta er eitt og eitt box
-  width: 100%;
+  &__box {
+    //þetta er eitt og eitt box
+    width: 100%;
 
-  padding-right: 0.5*$gutter;
-  padding-left: 0.5*$gutter;
-  margin-bottom: $gutter;
-}
+    padding-right: 0.5*$gutter;
+    padding-left: 0.5*$gutter;
+    margin-bottom: $gutter;
+  }
 
-.boxes__a {
-  display: flex;
-  flex-flow: column;
-  align-items: stretch;
+  &__a {
+    display: flex;
+    flex-flow: column;
+    align-items: stretch;
 
-  padding: 0;
-  margin: 0;
+    padding: 0;
+    margin: 0;
 
-  color: $black;
-  text-decoration: none;
-}
+    color: $black;
+    text-decoration: none;
+  }
 
-.boxes__mynd {
-  //thumbnailið innan í box
-  width: 100%;
-  flex-grow: 1;
-}
+  &__mynd {
+    //thumbnailið innan í box
+    width: 100%;
+    flex-grow: 1;
+  }
 
-.boxes__fyrirsogn {
-  //fyrirsagnirnar í gráu boxunum
-  padding: 0.5em;
-  background-color: $lightgrey;
-}
+  &__fyrirsogn {
+    //fyrirsagnirnar í gráu boxunum
+    padding: 0.5em;
+    background-color: $lightgrey;
+  }
 
-.boxes__fyrirsogn__titill {
-  //titillinn á fyrirlestrinum
-  font-family: $font-heading;
-  font-size: 1.5em;
-}
+  &__fyrirsogn__titill {
+    //titillinn á fyrirlestrinum
+    font-family: $font-heading;
+    font-size: 1.5em;
+  }
 
-.boxes__fyrirsogn__flokkur {
-  //flokkurinn á fyrirlestrinum (category, html/css/javascript)
-  font-family: $font-heading;
-  font-size: 0.75em;
-  text-transform: uppercase;
+  &__fyrirsogn__flokkur {
+    //flokkurinn á fyrirlestrinum (category, html/css/javascript)
+    font-family: $font-heading;
+    font-size: 0.75em;
+    text-transform: uppercase;
+  }
 }
 
 //stillingar fyrir fyrirlestur.html
