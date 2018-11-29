@@ -79,7 +79,7 @@ function setjaSamanBoxes(lects) {
     box.setAttribute('id', lect.slug);
     box.addEventListener('click', saekjaFyrirlestur, true);
     box.querySelector('a').classList.add('boxes__a');
-    box.querySelector('a').setAttribute('href', 'fyrirlestur.html');
+    box.querySelector('a').setAttribute('href', `fyrirlestur.html?slug=${lect.slug}`);
     box.querySelector('img').classList.add('boxes__mynd');
     box.querySelector('div').classList.add('boxes__fyrirsogn');
     box.querySelector('h4').classList.add('boxes__fyrirsogn__flokkur');
@@ -128,40 +128,39 @@ function buaTilFyrirlestur(lecture) {
   document.querySelector('.haus2').appendChild(el('h1', title));
 
   content.forEach((element) => {
+    let child;
     switch (element.type) {
       case 'youtube':
-        const elem = el('iframe', element.data);
-        elem.setAttribute('width', '1280');
-        elem.setAttribute('height', '720');
-        elem.setAttribute('frameborder', '0');
-        elem.setAttribute('allowfullscreen', '');
-        page.appendChild(elem);
+        child = el('iframe', element.data);
+        child.setAttribute('width', '1280');
+        child.setAttribute('height', '720');
+        child.setAttribute('frameborder', '0');
+        child.setAttribute('allowfullscreen', '');
         break;
       case 'text':
-        page.appendChild(el('p', element.data));
+        child = el('div', ...element.data.split('\n').map(x => el('p', x)));
         break;
       case 'quote':
-        page.appendChild(el('quote', element.data));
+        child = el('blockquote', element.data);
+        if (element.caption !== undefined) child.appendChild(el('cite', element.attribute));
         break;
       case 'image':
-        page.appendChild(el('img', element.data));
-        page.appendChild(el('p', element.caption));
+        child = el('div', el('img', element.data));
+        if (element.caption !== undefined) child.appendChild(el('p', element.caption));
         break;
       case 'heading':
-        page.appendChild(el('h2', element.data));
+        child = el('h2', element.data);
         break;
       case 'list':
-        // TODO Fix this
-        // þetta virkar ekki alveg. Þarf að láta allt í element.data
-        // fara í li sem er svo allt inní ul
-        page.appendChild(el('ul', ...Array.from(element.data).map(x => el('li', x))));
+        child = el('ul', ...Array.from(element.data).map(x => el('li', x)));
         break;
       case 'code':
-        page.appendChild(el('pre', ...Array.from(element.data).map(x => el('code', x))));
+        child = el('pre', ...Array.from(element.data).map(x => el('code', x)));
         break;
       default:
         break;
     }
+    page.appendChild(child);
   });
 }
 
