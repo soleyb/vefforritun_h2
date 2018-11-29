@@ -4,12 +4,22 @@ import { el, empty } from './lib/helpers';
 // ------------------------------- //
 // ---------- Universal ---------- //
 // ------------------------------- //
-
+function getSlug() {
+  const { search } = window.location;
+  if (search === '') return null;
+  return search.split('=')[1];
+}
 
 function saekjaFyrirlestra() {
   return fetch('../lectures.json')
     .then(res => res.json())
     .catch(error => console.error('Villa við að sækja gögn', error));
+}
+
+function klaradirFyrirlestrar() {
+  const local = localStorage.getItem('klaradirFyrirlestrar');
+  if (local === null) return [];
+  return JSON.parse(local);
 }
 
 
@@ -46,15 +56,6 @@ function makeGreen(e) {
   e.target.classList.toggle('takkar__takki--merkt');
 }
 
-// Sækir upplýsingar um fyrirlestur sem smellt er á.
-// Setur slugID á þeim fyrirlestri í localStorage.
-function saekjaFyrirlestur(e) {
-  let node = e.target;
-  while (!node.classList.contains('boxes__box')) node = node.parentNode;
-  const slug = node.id;
-  window.localStorage.setItem('slug', slug);
-}
-
 // Fall til að búa til boxin af fyrirlestrum á forsíðu.
 // Tekur inn safn af öllum fyrirlestrum sem á að sýna á forsíðu.
 function setjaSamanBoxes(lects) {
@@ -77,7 +78,6 @@ function setjaSamanBoxes(lects) {
     box.classList.add('boxes__box');
     box.classList.add('boxes__box__bg');
     box.setAttribute('id', lect.slug);
-    box.addEventListener('click', saekjaFyrirlestur, true);
     box.querySelector('a').classList.add('boxes__a');
     box.querySelector('a').setAttribute('href', `fyrirlestur.html?slug=${lect.slug}`);
     box.querySelector('img').classList.add('boxes__mynd');
@@ -86,6 +86,9 @@ function setjaSamanBoxes(lects) {
     box.querySelector('h3').classList.add('boxes__fyrirsogn__titill');
     if (lect.thumbnail === undefined) {
       box.querySelector('img').classList.add('img__nothumb');
+    }
+    if (klaradirFyrirlestrar().includes(lect.slug)) {
+      box.querySelector('.box__fyrirsogn').classList.add('klaradur');
     }
   });
 }
@@ -112,9 +115,23 @@ function hladaBoxes() {
 // ------------------------------- //
 
 
+function klaraFyrirlestur() {
+  let local = JSON.parse(localStorage.getItem('klaradirFyrirlestrar'));
+  const slug = getSlug();
+  console.log(slug)
+
+  // Ef enginn fyrirlestur hefur verið kláraður skráum við þennan sem fyrsta
+  // Annars togglum við hvort hann sé búinn.
+  if (local === null) local = { slugs: new Set() };
+  else if (local.slugs.has(slug)) local.slugs.delete(slug);
+  else local.slugs.add(slug);
+  localStorage.setItem('klaradirFyrirlestrar', JSON.stringify(local));
+
+  // HTML partur
+}
+
 // Fall sem setur saman fyrirlestur á fyrirlestrarsíðu.
 function buaTilFyrirlestur(lecture) {
-  // TODO Klára þetta fall.
   const page = document.querySelector('.efni');
   const {
     category,
@@ -123,6 +140,11 @@ function buaTilFyrirlestur(lecture) {
     title,
   } = lecture; // +slug +thumbnail eru til staðar
 
+  // Event listeners fyrir fyrirlestrasíðu.
+  const klaraTakki = document.querySelector('.takkar__klara');
+  klaraTakki.addEventListener('click', klaraFyrirlestur);
+
+  // Hér kemur HTML uppsetningin á síðunni.
   document.querySelector('.haus2').appendChild(el('img', image));
   document.querySelector('.haus2').appendChild(el('h3', category));
   document.querySelector('.haus2').appendChild(el('h1', title));
@@ -147,6 +169,7 @@ function buaTilFyrirlestur(lecture) {
       case 'image':
         child = el('figure', el('img', element.data));
         if (element.caption !== undefined) child.appendChild(el('figcaption', element.caption));
+        child.classList.add('mynd__texti');
         break;
       case 'heading':
         child = el('h2', element.data);
@@ -164,15 +187,24 @@ function buaTilFyrirlestur(lecture) {
   });
 }
 
+
+// ------------------------------- //
+// ------------- Main ------------ //
+// ------------------------------- //
+
+
 // Main fall sem keyrir allt.
 document.addEventListener('DOMContentLoaded', () => {
   const page = document.querySelector('body');
   const isLecturePage = page.classList.contains('lecture-page');
 
+  // Mismunandi keyrslur eftir hvor síðan er.
   if (isLecturePage) {
     saekjaFyrirlestra().then((data) => {
-      // Slug er slugið fyrir valinn fyrirlestur
-      const slug = window.localStorage.getItem('slug');
+      // Ef farið er beint á /fyrirlestur.html er enginn fyrirlestur
+      // til að sýna, svo notanda er beint á forsíðu.
+      if (getSlug() === null) window.location = '/';
+      const slug = getSlug();
       const fyrirlestur = valdiFyrirlestur(data.lectures, slug);
       buaTilFyrirlestur(fyrirlestur);
     });
