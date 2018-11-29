@@ -114,7 +114,6 @@ function hladaBoxes() {
 
 // Fall sem setur saman fyrirlestur á fyrirlestrarsíðu.
 function buaTilFyrirlestur(lecture) {
-  console.log(lecture);
   // TODO Klára þetta fall.
   const page = document.querySelector('.efni');
   const {
@@ -122,7 +121,7 @@ function buaTilFyrirlestur(lecture) {
     content,
     image,
     title,
-  } = lecture; // +slug +thumbnail
+  } = lecture; // +slug +thumbnail eru til staðar
 
   document.querySelector('.haus2').appendChild(el('img', image));
   document.querySelector('.haus2').appendChild(el('h3', category));
@@ -155,12 +154,10 @@ function buaTilFyrirlestur(lecture) {
         // TODO Fix this
         // þetta virkar ekki alveg. Þarf að láta allt í element.data
         // fara í li sem er svo allt inní ul
-        page.appendChild(el('ul',
-          Array.from(element.data).map((li) => {
-            el('li',li);
-          })));
+        page.appendChild(el('ul', ...Array.from(element.data).map(x => el('li', x))));
         break;
       case 'code':
+        page.appendChild(el('pre', ...Array.from(element.data).map(x => el('code', x))));
         break;
       default:
         break;
